@@ -39,55 +39,8 @@
   <br>
 
   <div class="s3">
-    <table class="table table-hover row-clickable" onclick="fun()">
+    <table class="table table-hover row-clickable" id="instruments" onclick="fun()">
       <tbody>
-        <tr>
-          <td>company</td>
-          <td>index price</td>
-          <td>change</td>
-        </tr>
-        <br>
-        <br>
-        <tr>
-          <td>apple</td>
-          <td>$3000</td>
-          <td>+0.41</td>
-        </tr>
-        <tr>
-          <td>apple</td>
-          <td>$3000</td>
-          <td>+0.41</td>
-        </tr>
-        <tr>
-          <td>apple</td>
-          <td>$3000</td>
-          <td>+0.41</td>
-        </tr>
-        <tr>
-          <td>apple</td>
-          <td>$3000</td>
-          <td>+0.41</td>
-        </tr>
-        <tr>
-          <td>apple</td>
-          <td>$3000</td>
-          <td>+0.41</td>
-        </tr>
-        <tr>
-          <td>apple</td>
-          <td>$3000</td>
-          <td>+0.41</td>
-        </tr>
-        <tr>
-          <td>apple</td>
-          <td>$3000</td>
-          <td>+0.41</td>
-        </tr>
-        <tr>
-          <td>apple</td>
-          <td>$3000</td>
-          <td>+0.41</td>
-        </tr>
       </tbody>
     </table>
   </div>
@@ -108,8 +61,6 @@
       <p class="r7">Buying Power &emsp;&emsp;&emsp;Profit&emsp;&emsp;&emsp; Day P/L</p>
       <p class="r8">$120,000 &emsp;&nbsp;&nbsp;&nbsp;$211 &nbsp; $179.19 </p>
     </div>
-
-
   </section>
 
   <div class="Tradehistory">
@@ -190,6 +141,40 @@
     </table>
   </div>
 
+  <script>
+    function createTable() {
+    const instruments = [
+        [ "ABC", "$3000", "+0.41", 1],
+        [ "BCD", "$300", "+0.1", 1],
+        [ "CDE", "$4000", "+0.11", 1],
+        [ "DEF", "$1234", "+0.21", 1],
+        [ "EFG", "$2345", "+0.31", 1],
+        [ "FGH", "$445", "+0.42", 1],
+        [ "HIJ", "$5000", "+0.51", 1],
+        [ "IJK", "$6000", "+0.61", 1],
+        [ "JKL", "$7000", "+0.71", 1],
+        [ "KLM", "$8000", "+0.81", 1],
+    ];
+    const tableBody = document.getElementById("instruments").getElementsByTagName('tbody')[0];
+
+  
+    instruments.forEach( instrument => {
+      let row = document.createElement('tr');
+      instrument.forEach( cellData => {
+        var cell = document.createElement('td');
+        cell.appendChild(document.createTextNode(cellData));
+        row.appendChild(cell);
+      });
+  
+      tableBody.appendChild(row);
+    });
+  
+    // table.appendChild(tableBody);
+    // document.body.appendChild(table);
+  }
+
+  createTable();
+  </script>
 </body>
 
 </html>
