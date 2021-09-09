@@ -21,7 +21,6 @@
   </div>
 
   <div class="navbar">
-
     <a class="a1" href="#"><i><i class="bi bi-globe icon-size"></i></i>&emsp;MARKETS</a>
     <a class="a1" href="#"><i><i class="bi bi-cart-dash-fill icon-size"></i></i>&emsp;TRADE</a>
     <a class="a1" href="#"><i><i class="bi bi-star icon-size"></i></i>&emsp;WATCHLIST</a>
@@ -41,6 +40,11 @@
   <div class="s3">
     <table class="table table-hover row-clickable" id="instruments" onclick="fun()">
       <tbody>
+        <tr>
+          <th>company</th>
+          <th>index price</th>
+          <th>change</th>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -57,7 +61,6 @@
       <p class="r6">$18,500 &emsp; $18,500 &emsp; &nbsp; $18,500 &emsp; $18,500</p>
     </div>
     <div class=side3>
-
       <p class="r7">Buying Power &emsp;&emsp;&emsp;Profit&emsp;&emsp;&emsp; Day P/L</p>
       <p class="r8">$120,000 &emsp;&nbsp;&nbsp;&nbsp;$211 &nbsp; $179.19 </p>
     </div>
@@ -65,115 +68,68 @@
 
   <div class="Tradehistory">
     <p style="font-family: Montserrat;"><b>Trade History</b></p>
-    <table class="ht">
+    <table class="ht" id="history-table">
       <tr style="font-family:Montserrat; font-size:15px;margin-bottom: 10px;">
-        <td> Stock</td>
-        <td>Price</td>
-        <td>No.of Shares</td>
-        <td>Broker</td>
-        <td>Time</td>
+        <th> Stock</th>
+        <th>Price</th>
+        <th>No.of Sharesh</th>
+        <th>Broker</th>
+        <th>Time</th>
       </tr>
-      <tr style="font-family:Montserrat; font-size:14px;">
-        <td>APL</td>
-        <td>300</td>
-        <td>25000</td>
-        <td>BoI</td>
-        <td>09:52:00</td>
-      </tr>
-      <tr style="font-family:Montserrat; font-size:14px;">
-        <td>APL</td>
-        <td>300</td>
-        <td>25000</td>
-        <td>BoI</td>
-        <td>09:52:00</td>
-      </tr>
-      <tr style="font-family:Montserrat; font-size:14px;">
-        <td>APL</td>
-        <td>300</td>
-        <td>25000</td>
-        <td>BoI</td>
-        <td>09:52:00</td>
-      </tr>
-      <tr style="font-family:Montserrat; font-size:14px;">
-        <td>APL</td>
-        <td>300</td>
-        <td>25000</td>
-        <td>BoI</td>
-        <td>09:52:00</td>
-      </tr>
-      <tr style="font-family:Montserrat; font-size:14px;">
-        <td>APL</td>
-        <td>300</td>
-        <td>25000</td>
-        <td>BoI</td>
-        <td>09:52:00</td>
-      </tr>
-      <tr style="font-family:Montserrat; font-size:14px;">
-        <td>APL</td>
-        <td>300</td>
-        <td>25000</td>
-        <td>BoI</td>
-        <td>09:52:00</td>
-      </tr>
-      <tr style="font-family:Montserrat; font-size:14px;">
-        <td>APL</td>
-        <td>300</td>
-        <td>25000</td>
-        <td>BoI</td>
-        <td>09:52:00</td>
-      </tr>
-      <tr style="font-family:Montserrat; font-size:14px;">
-        <td>APL</td>
-        <td>300</td>
-        <td>25000</td>
-        <td>BoI</td>
-        <td>09:52:00</td>
-      </tr>
-      <tr style="font-family:Montserrat; font-size:14px;">
-        <td>APL</td>
-        <td>300</td>
-        <td>25000</td>
-        <td>BoI</td>
-        <td>09:52:00</td>
-      </tr>
-
-
     </table>
   </div>
 
   <script>
-    function fillInstruments() {
+
+
     const instruments = [
-        [ "ABC", "$3000", "+0.41", 1],
-        [ "BCD", "$300", "+0.1", 1],
-        [ "CDE", "$4000", "+0.11", 1],
-        [ "DEF", "$1234", "+0.21", 1],
-        [ "EFG", "$2345", "+0.31", 1],
-        [ "FGH", "$445", "+0.42", 1],
-        [ "HIJ", "$5000", "+0.51", 1],
-        [ "IJK", "$6000", "+0.61", 1],
-        [ "JKL", "$7000", "+0.71", 1],
-        [ "KLM", "$8000", "+0.81", 1],
+      ["ABC", "$3000", "+0.41"],
+      ["BCD", "$300", "+0.1"],
+      ["CDE", "$4000", "+0.11"],
+      ["DEF", "$1234", "+0.21"],
+      ["EFG", "$2345", "+0.31"],
+      ["FGH", "$445", "+0.42"],
+      ["HIJ", "$5000", "+0.51"],
+      ["IJK", "$6000", "+0.61"],
+      ["JKL", "$7000", "+0.71"],
+      ["KLM", "$8000", "+0.81"],
     ];
-    const tableBody = document.getElementById("instruments").getElementsByTagName('tbody')[0];
+    const instrumentsBody = document.getElementById("instruments").getElementsByTagName('tbody')[0];
+    const historyBody = document.getElementById("history-table").getElementsByTagName('tbody')[0];
 
-  
-    instruments.forEach( instrument => {
-      let row = document.createElement('tr');
-      instrument.forEach( cellData => {
-        var cell = document.createElement('td');
-        cell.appendChild(document.createTextNode(cellData));
-        row.appendChild(cell);
+    function fillInstruments() {
+
+
+      instruments.forEach(instrument => {
+        let row = document.createElement('tr');
+        instrument.forEach(cellData => {
+          let cell = document.createElement('td');
+          cell.appendChild(document.createTextNode(cellData));
+          row.appendChild(cell);
+        });
+
+        instrumentsBody.appendChild(row);
       });
-  
-      tableBody.appendChild(row);
-    });
-  
-    // table.appendChild(tableBody);
-    // document.body.appendChild(table);
-  }
+    }
 
-  fillInstruments();
+    function fillHistory(instrument) {
+      for (let index = 0; index < 10; index++) {
+        let row = document.createElement('tr')
+        let pseudoParams = [instrument, 300, 25000, "BoI", "09:52:00"];
+        // row.style = "font-family:Montserrat; font-size:14px;"
+        pseudoParams.forEach(cellData => {
+
+          let cell = document.createElement('td');
+          cell.appendChild(document.createTextNode(cellData));
+          row.appendChild(cell);
+        });
+
+        historyBody.appendChild(row);
+      }
+    }
+
+    fillInstruments();
+    fillHistory("ABC");
   </script>
 </body>
 
